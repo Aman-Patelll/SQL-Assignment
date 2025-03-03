@@ -1,4 +1,15 @@
--- Store-Specific (Facility-Wise) Revenue  
+--  Store-Specific (Facility-Wise) Revenue
+-- Business Problem:
+-- Different physical or online stores (facilities) may have varying levels of performance. The business wants to compare revenue across facilities for sales planning and budgeting.
+
+-- Fields to Retrieve:
+
+-- FACILITY_ID
+-- FACILITY_NAME
+-- TOTAL_ORDERS
+-- TOTAL_REVENUE
+-- DATE_RANGE
+     
 SELECT  
     F.facility_id,  
     F.facility_name,  
