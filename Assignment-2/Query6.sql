@@ -1,4 +1,17 @@
--- Low Stock or Out of Stock Items Report  
+-- Low Stock or Out of Stock Items Report
+-- Business Problem:
+-- Avoiding out-of-stock situations is critical. This report flags items that have fallen below a certain reorder threshold or have zero available stock.
+
+-- Fields to Retrieve:
+
+-- PRODUCT_ID
+-- PRODUCT_NAME
+-- FACILITY_ID
+-- QOH (Quantity on Hand)
+-- ATP (Available to Promise)
+-- REORDER_THRESHOLD
+-- DATE_CHECKED
+    
 SELECT  
     P.product_id,  
     P.product_name,  
