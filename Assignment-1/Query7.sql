@@ -1,4 +1,14 @@
--- Newly Created Sales Orders and Payment Methods  
+-- 7 Newly Created Sales Orders and Payment Methods
+-- Business Problem:
+-- Finance teams need to see new orders and their payment methods for reconciliation and fraud checks.
+
+-- Fields to Retrieve:
+
+-- ORDER_ID
+-- TOTAL_AMOUNT
+-- PAYMENT_METHOD
+-- Shopify Order ID (if applicable)
+    
 SELECT DISTINCT  
     OH.order_id,  
     OH.grand_total AS total_amount,  
