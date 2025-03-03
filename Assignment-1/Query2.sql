@@ -1,4 +1,13 @@
--- List All Active Physical Products  
+-- 2 List All Active Physical Products
+-- Business Problem:
+-- Merchandising teams often need a list of all physical products to manage logistics, warehousing, and shipping.
+
+-- Fields to Retrieve:
+
+-- PRODUCT_ID
+-- PRODUCT_TYPE_ID
+-- INTERNAL_NAME
+
 SELECT  
     P.product_id,  
     P.product_type_id,  
