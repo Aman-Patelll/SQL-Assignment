@@ -1,9 +1,12 @@
--- Product Threshold Value  
-SELECT  
-    PF.product_id,  
-    PF.minimum_stock AS threshold  
-FROM product_facility AS PF  
-JOIN facility AS F ON F.facility_id = PF.facility_id  
-WHERE F.facility_type_id = 'CONFIGURATION'  
-AND PF.minimum_stock IS NOT NULL  
-ORDER BY threshold DESC;  
+-- 12 Product Threshold Value
+-- Business Problem The retailer has set a threshild value for products that are sold online, in order to avoid over selling.
+
+-- Fields to Retrieve:
+
+-- PRODUCT ID
+-- THRESHOLD
+  
+SELECT 
+    product_id, 
+    minimum_stock 
+FROM Product_facility;
