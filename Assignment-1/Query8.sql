@@ -1,4 +1,14 @@
--- Payment Captured but Not Shipped  
+-- 8 Payment Captured but Not Shipped
+-- Business Problem:
+-- Finance teams want to ensure revenue is recognized properly. If payment is captured but no shipment has occurred, it warrants further review.
+
+-- Fields to Retrieve:
+
+-- ORDER_ID
+-- ORDER_STATUS
+-- PAYMENT_STATUS
+-- SHIPMENT_STATUS
+
 SELECT  
     OH.order_id,  
     OH.status_id AS order_status,  
@@ -9,4 +19,4 @@ JOIN order_payment_preference AS OPP ON OH.order_id = OPP.order_id
 JOIN order_shipment AS OS ON OH.order_id = OS.order_id  
 JOIN shipment AS S ON OS.shipment_id = S.shipment_id  
 WHERE S.status_id != 'SHIPMENT_SHIPPED'  
-AND OPP.status_id = 'PAYMENT_RECEIVED';  
+AND OPP.status_id = 'PAYMENT_SETTLED';  
