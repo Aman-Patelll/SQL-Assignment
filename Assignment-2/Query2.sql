@@ -1,4 +1,19 @@
--- Orders from New York  
+-- 5.2 Orders from New York
+-- Business Problem:
+-- Companies often want region-specific analysis to plan local marketing, staffing, or promotions in certain areas—here, specifically, New York.
+
+-- Fields to Retrieve:
+
+-- ORDER_ID
+-- CUSTOMER_NAME
+-- STREET_ADDRESS (or shipping address detail)
+-- CITY
+-- STATE_PROVINCE
+-- POSTAL_CODE
+-- TOTAL_AMOUNT
+-- ORDER_DATE
+-- ORDER_STATUS
+    
 SELECT  
     OH.order_id,  
     P.first_name,  
