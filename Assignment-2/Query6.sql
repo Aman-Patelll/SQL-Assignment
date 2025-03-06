@@ -23,7 +23,6 @@ SELECT
 FROM product AS P  
 JOIN inventory_item AS II ON P.product_id = II.product_id  
 JOIN product_facility AS PF ON P.product_id = PF.product_id  
-    AND II.facility_id = PF.facility_id  
 WHERE II.quantity_on_hand_total <= PF.minimum_stock  
    OR II.available_to_promise_total <= PF.minimum_stock  
 ORDER BY PF.minimum_stock DESC;  
