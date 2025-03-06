@@ -6,7 +6,11 @@
 -- PRODUCT ID
 -- THRESHOLD
   
-SELECT 
-    product_id, 
-    minimum_stock 
-FROM Product_facility;
+SELECT  
+    PR.product_id,  
+    PF.minimum_stock AS Threshold  
+FROM product PR  
+JOIN product_facility PF ON PR.product_id = PF.product_id  
+JOIN facility F ON F.facility_id = PF.facility_id  
+WHERE F.facility_type_id = 'CONFIGURATION'  
+ORDER BY PF.minimum_stock DESC;
