@@ -37,4 +37,5 @@ JOIN product AS P ON P.product_id = OI.product_id
 JOIN order_item_ship_group AS OISG ON OI.order_id = OISG.order_id  
 JOIN facility AS F ON F.facility_id = OISG.facility_id  
 JOIN order_history AS OHI ON OH.order_id = OHI.order_id  
-WHERE OH.status_id = 'ORDER_COMPLETED' AND OH.CREATED_STAMP BETWEEN '2023-08-01' AND '2023-08-31';  
+JOIN order_status OS ON OH.status_id = OS.status_id
+WHERE OH.status_id = 'ORDER_COMPLETED' AND OS.status_datetime BETWEEN '2023-08-01' AND '2023-08-31'; 
