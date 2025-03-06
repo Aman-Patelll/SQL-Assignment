@@ -12,14 +12,14 @@
 -- TRANSACTION_DATE
      
 SELECT  
+    PR.product_id,  
     II.inventory_item_id,  
-    II.product_id,  
+    IIV.variance_reason_id,  
     II.facility_id,  
-    ABS(IID.quantity_on_hand_diff) AS quantity_lost_or_damaged,  
-    IID.reason_enum_id AS reason_code,  
-    IID.effective_date AS transaction_date  
-FROM inventory_item AS II  
-JOIN inventory_item_detail AS IID ON II.inventory_item_id = IID.inventory_item_id  
-WHERE IID.quantity_on_hand_diff < 0  
-AND IID.reason_enum_id IN ('VAR_DAMAGED', 'VAR_STOLEN', 'VAR_LOST')  
-ORDER BY IID.effective_date DESC;  
+    COUNT(PR.product_id) AS product_total  
+FROM product PR  
+JOIN inventory_item II ON II.product_id = PR.product_id  
+JOIN inventory_item_variance IIV ON IIV.inventory_item_id = II.inventory_item_id  
+WHERE IIV.variance_reason_id IS NOT NULL  
+AND (IIV.variance_reason_id = 'VAR_LOST' OR IIV.variance_reason_id = 'VAR_DAMAGED')  
+GROUP BY II.facility_id, PR.product_id, IIV.variance_reason_id, II.inventory_item_id;
