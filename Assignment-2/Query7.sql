@@ -19,5 +19,5 @@ SELECT
 FROM order_header AS OH  
 JOIN order_item_ship_group AS OISG ON OH.order_id = OISG.order_id  
 JOIN facility AS F ON OISG.facility_id = F.facility_id  
-WHERE OH.status_id IN ('ORDER_APPROVED', 'ORDER_CREATED', 'ORDER_PROCESSING')  
+WHERE OH.status_id NOT IN ('ORDER_COMPLETED', 'ORDER_CANCELLED')  
 ORDER BY OH.order_id;  
