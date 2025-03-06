@@ -1,15 +1,24 @@
--- Single-Return Orders (Last Month)  
+-- 3 Single-Return Orders (Last Month)
+-- Business Problem:
+-- The mechandising team needs a list of orders that only have one return.
+
+-- Fields to Retrieve:
+
+-- PARTY_ID
+-- FIRST_NAME
+
 SELECT  
-    P.party_id,  
     PER.first_name,  
-    RH.entry_date  
-FROM return_header AS RH  
-JOIN party AS P ON RH.from_party_id = P.party_id  
-JOIN person AS PER ON PER.party_id = P.party_id  
-JOIN return_item AS RI ON RI.return_id = RH.return_id  
-WHERE RH.entry_date BETWEEN '2025-01-12' AND '2025-02-12'  
-AND (  
-    SELECT COUNT(*)  
-    FROM return_item AS RI2  
-    WHERE RI2.order_id = RI.order_id  
-) = 1;  -- Ensures only one return per order  
+    RH.from_party_id  
+FROM return_item RI  
+JOIN return_header RH ON RI.return_id = RH.return_id  
+JOIN person PER ON PER.party_id = RH.from_party_id  
+WHERE (RH.return_date >= DATE_FORMAT(CURDATE() - INTERVAL 1 MONTH, '%Y-%m-01')  
+AND RH.return_date < DATE_FORMAT(CURDATE(), '%Y-%m-01'))  
+AND RI.order_id IN (  
+    SELECT order_id  
+    FROM return_item  
+    GROUP BY order_id  
+    HAVING COUNT(*) = 1  
+)  
+ORDER BY RH.from_party_id;
