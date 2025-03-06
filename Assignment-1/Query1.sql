@@ -11,19 +11,16 @@
 -- PHONE
 -- ENTRY_DATE
 
-SELECT  
-    PER.party_id,  
-    PER.first_name,  
-    PER.last_name,  
-    PTYRL.role_type_id,  
-    CM.info_string AS email_address,  
-    TN.contact_number,  
-    PER.created_stamp AS entry_date  
-FROM person AS PER  
-INNER JOIN party_role AS PTYRL ON PER.party_id = PTYRL.party_id  
-LEFT JOIN party_contact_mech AS PCM ON PER.party_id = PCM.party_id  
-JOIN contact_mech AS CM ON PCM.contact_mech_id = CM.contact_mech_id  
-JOIN telecom_number AS TN ON PCM.contact_mech_id = TN.contact_mech_id  
-WHERE PTYRL.role_type_id = 'CUSTOMER'  
-AND PER.created_stamp BETWEEN '2023-06-01' AND '2023-06-30'
-ORDER BY entry_date;
+SELECT 
+    PER.party_id, 
+    PER.first_name, 
+    PER.last_name, 
+    CM.info_string AS email,
+    TN.contact_number AS phone
+FROM person PER
+JOIN party_contact_mech PCM ON PCM.party_id = PER.party_id
+JOIN contact_mech CM ON CM.contact_mech_id = PCM.contact_mech_id
+LEFT JOIN telecom_number TN ON TN.contact_mech_id = CM.contact_mech_id 
+JOIN party PTY on PTY.party_id=PER.party_id 
+JOIN party_role PR on PR.party_id=PER.party_id
+where PTY.created_date BETWEEN '2023-06-01' AND '2023-07-01' and PR.role_type_id='CUSTOMER';
