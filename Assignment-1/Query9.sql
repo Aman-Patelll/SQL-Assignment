@@ -8,7 +8,7 @@
 -- HOUR
 
 SELECT  
-	HOUR(status_datetime) + 1 AS hour,
+    HOUR(status_datetime) + 1 AS hour,
     COUNT(order_id) AS total_orders
 FROM order_status  
 WHERE status_id = 'ORDER_COMPLETED'  
