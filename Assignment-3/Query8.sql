@@ -1,12 +1,22 @@
--- List of Warehouse Pickers  
-SELECT  
-    P.party_id,  
-    CONCAT(PER.first_name, ' ', PER.last_name) AS name,  
-    FP.role_type_id,  
-    FP.facility_id,  
-    P.status_id AS status  
-FROM party AS P  
-JOIN person AS PER ON P.party_id = PER.party_id  
-JOIN facility_party AS FP ON FP.party_id = P.party_id  
-WHERE P.party_type_id = 'PERSON'  
-AND FP.role_type_id = 'WAREHOUSE_PICKER';  
+-- 8 List of Warehouse Pickers
+-- Business Problem:
+-- Warehouse managers need a list of employees responsible for picking and packing orders to manage shifts, productivity, and training needs.
+
+-- Fields to Retrieve:
+
+-- PARTY_ID (or Employee ID)
+-- NAME (First/Last)
+-- ROLE_TYPE_ID (e.g., “WAREHOUSE_PICKER”)
+-- FACILITY_ID (assigned warehouse)
+-- STATUS (active or inactive employee)
+
+
+SELECT DISTINCT PLR.party_id,  
+       PER.first_name,  
+       PLR.role_type_id,  
+       PL.facility_id,  
+       P.status_id AS User_Status  
+FROM picklist_role PLR  
+JOIN person PER ON PER.party_id = PLR.party_id  
+JOIN picklist PL ON PL.picklist_id = PLR.picklist_id  
+JOIN party P ON P.party_id = PLR.party_id;
