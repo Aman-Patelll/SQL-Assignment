@@ -30,5 +30,4 @@ JOIN order_header AS OH ON OCM.order_id = OH.order_id
 JOIN party_contact_mech AS PCM ON PCM.contact_mech_id = OCM.contact_mech_id  
 JOIN person AS P ON P.party_id = PCM.party_id  
 JOIN postal_address AS PA ON PA.contact_mech_id = PCM.contact_mech_id  
-WHERE OCM.contact_mech_purpose_type_id = 'SHIPPING_LOCATION'  
-AND PA.city = 'New York';  
+WHERE PA.city = 'New York';  
