@@ -18,8 +18,8 @@ SELECT
     CM.info_string AS email,
     TN.contact_number AS phone
 FROM person PER
-JOIN party_contact_mech PCM ON PCM.party_id = PER.party_id
-JOIN contact_mech CM ON CM.contact_mech_id = PCM.contact_mech_id
+LEFT JOIN party_contact_mech PCM ON PCM.party_id = PER.party_id
+LEFT JOIN contact_mech CM ON CM.contact_mech_id = PCM.contact_mech_id
 LEFT JOIN telecom_number TN ON TN.contact_mech_id = CM.contact_mech_id 
 JOIN party PTY on PTY.party_id=PER.party_id 
 JOIN party_role PR on PR.party_id=PER.party_id
