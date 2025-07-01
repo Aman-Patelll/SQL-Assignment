@@ -16,7 +16,8 @@ SELECT
     S.status_id AS shipment_status  
 FROM order_header AS OH  
 JOIN order_payment_preference AS OPP ON OH.order_id = OPP.order_id  
-JOIN order_shipment AS OS ON OH.order_id = OS.order_id  
-JOIN shipment AS S ON OS.shipment_id = S.shipment_id  
-WHERE S.status_id != 'SHIPMENT_SHIPPED'  
-AND OPP.status_id = 'PAYMENT_SETTLED';  
+LEFT JOIN order_shipment AS OS ON OH.order_id = OS.order_id  
+LEFT JOIN shipment AS S ON OS.shipment_id = S.shipment_id  
+WHERE S.status_id != 'SHIPMENT_SHIPPED' AND S.status_id != 'SHIPMENT_DELIVERED' 
+AND OPP.status_id = 'PAYMENT_SETTLED'
+ORDER BY OH.order_date;
